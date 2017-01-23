@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<!--  
+ *===============================================================* 
+ * theDome Informática
+ * 
+ * Projeto Drogaria - Projeto para venda de sistema drogaria
+ *===============================================================* 
+ * Arquivo de configuração do Hibernate
+ * Tecnologia: Java/Hibernate 
+ *===============================================================*
+ -->
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- Configurações de Conexão -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/db_drogaria</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">root</property>
+
+		<!-- Pool de Conexões JDBC - Quantidade de Conexões -->
+		<property name="connection.pool_size">1</property>
+
+		<!-- Qual Banco de Dados será usado - dialeto de sql a ser usado -->
+		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+
+		<!-- Gerenciamento de Sessão -->
+		<property name="current_session_context_class">thread</property>
+
+		<!-- Desabilitar cache -->
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+		<!-- Mostra os comandos que o Hibernate usa no SQL -->
+		<property name="show_sql">true</property>
+
+		<!-- Cria tabelas -->
+		<property name="hbm2ddl.auto">validate</property>
+		<!-- <property name="hbm2ddl.auto">create</property>acima estamos criando as tabelas do zero, se existitem na base, apaga(drop) e cria novamente -->
+		<!-- <property name="hbm2ddl.auto">validate</property>// para validar a tabela - só mexe nas alterações feitas na tabela  -->
+		<!-- <property name="hbm2ddl.auto">update</property>  // para atualizar a tabela -->
+
+        <!-- abaixo as classes com as persistências que serao usadas para criar as tabelas no BD -->
+		<mapping class="br.com.drogaria.domain.Fabricante" />
+		<mapping class="br.com.drogaria.domain.Funcionario" />
+		<mapping class="br.com.drogaria.domain.Produto" />
+		<mapping class="br.com.drogaria.domain.Venda" />
+		<mapping class="br.com.drogaria.domain.Item" />
+
+	</session-factory>
+
+</hibernate-configuration>
