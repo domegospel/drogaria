@@ -29,10 +29,10 @@ public class FabricanteDAOTest {
 	public void salvar(){
 		
 		Fabricante f1 = new Fabricante();
-		f1.setDescricao("Kimbal LABs");
+		f1.setDescricao("ACME Corp.");
 		
 		Fabricante f2 = new Fabricante();
-		f2.setDescricao("Palmer Lab");
+		f2.setDescricao("Lightman Corp");
 
 		FabricanteDAO dao = new FabricanteDAO();
 		
@@ -67,4 +67,56 @@ public class FabricanteDAOTest {
 		System.out.println(f1);
 		System.out.println(f2);
 	}
+	//Notacao JUnit para testar o metodo 
+	@Test
+	//Notacao JUnit para que este metodo seja ignorado
+	  @Ignore
+	//Metodo para excluir por Codido do Fabricante no BD
+	public void excluir(){
+		FabricanteDAO dao = new FabricanteDAO();
+		
+		//Precisamos primeiro buscar o registro no BD para que seja feita a exclusao por inteiro
+		Fabricante f1 = dao.buscarPorCodigo(4L);
+		
+		//Se encontrar o registro entao exclua
+		if (f1 != null){
+		//Para depois exclui-lo no tabela
+		dao.excluir(f1);
+		}
+
+	}
+	//Notacao JUnit para testar o metodo 
+	@Test
+	//Notacao JUnit para que este metodo seja ignorado
+	@Ignore
+	//Metodo para excluir por Codido do Fabricante no BD
+	public void excluir2(){
+		FabricanteDAO dao = new FabricanteDAO();
+		
+		//Ira excluir a partir de um codigo
+		dao.excluir(6L);
+
+	}
+	//Notacao JUnit para testar o metodo 
+	@Test
+	//Notacao JUnit para que este metodo seja ignorado
+	//@Ignore
+	//Metodo para salvar o Fabricante no BD
+	public void editar(){
+		
+		Fabricante f1 = new Fabricante();
+		f1.setCodigo(9L);
+		f1.setDescricao("Gandalf Round");
+		
+		Fabricante f2 = new Fabricante();
+		f2.setCodigo(10L);
+		f2.setDescricao("Moria Inc");
+
+		FabricanteDAO dao = new FabricanteDAO();
+		
+		dao.editar(f1);
+		dao.editar(f2);
+	}
 }
+
+

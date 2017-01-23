@@ -110,5 +110,128 @@ public class FabricanteDAO {
 		//retornar o fabricante encontrado
 		return fabricante;
 	}
+
+	/*-----------------------------------------------* 
+	 * Metodo Excluir Fabricante
+	 *-----------------------------------------------*/
+	public void excluir(Fabricante fabricante) {
+		
+		// Abrir sessao utilizando o Hibernate(classe HibernateUtil)
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		
+		// Criar transacao, garantir exito da gravacao do registro
+		Transaction transacao = null;
+		
+		//Tentando gravar o registro na BD
+		try {
+			//iniciar a transacao abrindo a sessao
+			transacao = sessao.beginTransaction();
+			//deletar os dados do fabricante na tabela
+			sessao.delete(fabricante);
+			//confirmar a gravacao
+			transacao.commit();
+		//em caso de erro - RuntimeException para nao deixar o processo parar	
+		} catch(RuntimeException ex) {
+			// Se transacao foi aberta e o erro aconteceu no momento da gravacao
+			if (transacao != null) {
+				//desfazer qualquer alteracao na tabela
+				transacao.rollback(); 
+				}
+			//propagar o erro
+			throw ex;
+		//De qualquer forma, com erro ou no sucesso da transacao	
+		} finally {
+			//fechar a sessao
+			sessao.close();
+		}
+	}
+
+	/*-----------------------------------------------* 
+	 * Metodo Excluir Fabricante com código
+	 *-----------------------------------------------*/
+	public void excluir(Long codigo) {
+		
+		// Abrir sessao utilizando o Hibernate(classe HibernateUtil)
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		
+		// Criar transacao, garantir exito da gravacao do registro
+		Transaction transacao = null;
+		
+		//Tentando gravar o registro na BD
+		try {
+			//iniciar a transacao abrindo a sessao
+			transacao = sessao.beginTransaction();
+			
+			//Buscar o registro a partir do codigo 
+			FabricanteDAO dao = new FabricanteDAO();
+			Fabricante f1 = dao.buscarPorCodigo(codigo);
+			
+			if (f1 != null) {
+		       //deletar os dados do fabricante na tabela a partir do registro encontrado
+			   sessao.delete(f1);
+			   //confirmar a gravacao
+			   transacao.commit();
+			}
+		//em caso de erro - RuntimeException para nao deixar o processo parar	
+		} catch(RuntimeException ex) {
+			// Se transacao foi aberta e o erro aconteceu no momento da gravacao
+			if (transacao != null) {
+				//desfazer qualquer alteracao na tabela
+				transacao.rollback(); 
+				}
+			//propagar o erro
+			throw ex;
+		//De qualquer forma, com erro ou no sucesso da transacao	
+		} finally {
+			//fechar a sessao
+			sessao.close();
+		}
+	}
+	
+	/*-----------------------------------------------* 
+	 * Metodo Editar Fabricante com código
+	 *-----------------------------------------------*/
+	public void editar(Fabricante fabricante) {
+		
+		// Abrir sessao utilizando o Hibernate(classe HibernateUtil)
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		
+		// Criar transacao, garantir exito da gravacao do registro
+		Transaction transacao = null;
+		
+		//Tentando gravar o registro na BD
+		try {
+			//iniciar a transacao abrindo a sessao
+			transacao = sessao.beginTransaction();
+			
+			//Buscar o registro a partir do codigo 
+			FabricanteDAO dao = new FabricanteDAO();
+			Fabricante f1 = dao.buscarPorCodigo(fabricante.getCodigo());
+
+			//aqui nao houve necessidade, mas lembrar que se nao forem alterados todos 
+            //os campos, devemos passar os campos encontrados na busca(f1) e que nao 
+            //sofreram alteracao para o objeto(fabricante) que sera atualizado na tabela
+			
+			if (f1 != null) {
+			   //deletar os dados do fabricante na tabela a partir do registro encontrado
+			   sessao.update(fabricante);
+			   //confirmar a gravacao
+			   transacao.commit();
+			}
+		//em caso de erro - RuntimeException para nao deixar o processo parar	
+		} catch(RuntimeException ex) {
+			// Se transacao foi aberta e o erro aconteceu no momento da gravacao
+			if (transacao != null) {
+				//desfazer qualquer alteracao na tabela
+				transacao.rollback(); 
+				}
+			//propagar o erro
+			throw ex;
+		//De qualquer forma, com erro ou no sucesso da transacao	
+		} finally {
+			//fechar a sessao
+			sessao.close();
+		}
+	}
 	
 }
