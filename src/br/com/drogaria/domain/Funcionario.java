@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /*===============================================================* 
@@ -21,6 +23,16 @@ import javax.persistence.Table;
 @Entity
 //Nome da tabela que será criada no BD
 @Table(name = "tbl_funcionarios")
+//Queries feitas usando hibernate
+@NamedQueries({ 
+	//Query para listar funcionarios
+	@NamedQuery(name  = "Funcionario.listar", 
+              query = "Select funcionario From Funcionario funcionario"),
+	//Query para selecionar fabricante por codigo
+	@NamedQuery(name  = "Funcionario.buscarPorCodigo",
+	            query = "Select funcionario From Funcionario funcionario "
+	            		+ " Where funcionario.codigo = :codigo")
+  })
 //Classe de construcao do Funcionario, indica os campos, chaves e tudo concernente a tabela
 public class Funcionario {
 	//Este campo sera chave, gerado automaticamente pelo BD e seu nome fisico é fun_codigo
@@ -86,4 +98,11 @@ public class Funcionario {
 	public void setFuncao(String funcao) {
 		this.funcao = funcao;
 	}
+
+	@Override
+	public String toString() {
+		return "Funcionario [codigo=" + codigo + ", nome=" + nome + ", cpf=" + cpf + ", senha=" + senha + ", funcao="
+				+ funcao + "]";
+	}
+	
 }
