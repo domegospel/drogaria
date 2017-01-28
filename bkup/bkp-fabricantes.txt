@@ -1,0 +1,10 @@
+1;MetaLab; 
+2;Leroy Merlin; 
+3;StarLABs; 
+5;Kimbal LABs; 
+7;Umbrella Corp.; 
+8;Tomorrow Labs; 
+9;Gandalf Round; 
+10;Moria Inc; 
+11;Licantro Arm; 
+12;Garbage Inc; 

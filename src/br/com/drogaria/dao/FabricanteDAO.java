@@ -148,6 +148,7 @@ public class FabricanteDAO {
 
 	/*-----------------------------------------------* 
 	 * Metodo Excluir Fabricante com código
+	 * Nao vamos usar aqui mas vou manter para efeito didatico
 	 *-----------------------------------------------*/
 	public void excluir(Long codigo) {
 		

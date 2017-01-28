@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import br.com.drogaria.dao.FabricanteDAO;
 import br.com.drogaria.domain.Fabricante;
+import br.com.drogaria.main.GerarBackUp;
+import br.com.drogaria.main.LerBackUp;
 
 
 /*===============================================================* 
@@ -85,22 +87,11 @@ public class FabricanteDAOTest {
 		}
 
 	}
+	
 	//Notacao JUnit para testar o metodo 
 	@Test
 	//Notacao JUnit para que este metodo seja ignorado
 	@Ignore
-	//Metodo para excluir por Codido do Fabricante no BD
-	public void excluir2(){
-		FabricanteDAO dao = new FabricanteDAO();
-		
-		//Ira excluir a partir de um codigo
-		dao.excluir(6L);
-
-	}
-	//Notacao JUnit para testar o metodo 
-	@Test
-	//Notacao JUnit para que este metodo seja ignorado
-	//@Ignore
 	//Metodo para salvar o Fabricante no BD
 	public void editar(){
 		
@@ -116,6 +107,21 @@ public class FabricanteDAOTest {
 		
 		dao.editar(f1);
 		dao.editar(f2);
+	}
+	
+	//Notacao JUnit para testar o metodo 
+	@Test
+	//Notacao JUnit para que este metodo seja ignorado
+	//@Ignore
+	//Metodo gerar back-up de Fabricantes
+	public void gerarbkp(){
+	
+		GerarBackUp gerar = new GerarBackUp();
+		LerBackUp   ler   = new LerBackUp();
+		
+		gerar.geraBackUpFabricante();
+		ler.lerBackUpFabricante();
+		
 	}
 }
 
